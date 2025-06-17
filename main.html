@@ -1,29 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Alphabetical Article Sorter</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 2rem;
+      background-color: #f8f9fa;
     }
+
     h1 {
+      font-size: 1.8rem;
       margin-bottom: 1rem;
+      color: #333;
     }
-    ul#band {
+
+    ul#bands {
       list-style: none;
       padding: 0;
+      background: #fff;
+      border-radius: 8px;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    ul#band li {
-      padding: 6px 0;
+
+    ul#bands li {
+      padding: 10px 16px;
+      border-bottom: 1px solid #ddd;
       font-size: 1.1rem;
+      color: #444;
+    }
+
+    ul#bands li:last-child {
+      border-bottom: none;
     }
   </style>
 </head>
 <body>
   <h1>Sorted Band Names</h1>
-  <ul id="band"></ul>
+  <ul id="bands"></ul> <!-- ✅ Correct ID used here -->
 
   <script>
     const bands = [
@@ -42,18 +58,18 @@
       'An Old Dog'
     ];
 
-    // Function to remove leading articles
-    function stripArticle(bandName) {
-      return bandName.replace(/^(a |an |the )/i, '').trim();
+    // Function to strip articles for sorting
+    function stripArticle(name) {
+      return name.replace(/^(a |an |the )/i, '').trim();
     }
 
-    // Sort the bands ignoring "a", "an", and "the"
+    // Sort the bands ignoring the articles
     const sortedBands = bands.slice().sort((a, b) => {
       return stripArticle(a).localeCompare(stripArticle(b));
     });
 
-    // Add sorted items to the UL
-    const bandList = document.getElementById('band');
+    // Insert sorted bands into the DOM
+    const bandList = document.getElementById('bands');
     sortedBands.forEach(band => {
       const li = document.createElement('li');
       li.textContent = band;
